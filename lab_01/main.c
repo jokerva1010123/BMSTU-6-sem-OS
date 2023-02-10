@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <errno.h>
 #include <unistd.h>
-#include <wait.h>
 #define STR1 "How are you from child 1?"
 #define STR2 "How are you from child 2?"
 #define ANSWER1 "I'm ok, thank you to child 1."
@@ -47,7 +46,8 @@ int main(int argc, char ** argv)
             read(sockets[0], buf, sizeof(buf));
             printf("Child %d received message: %s\n", i + 1, buf);
             close(sockets[0]);
-            exit(0); // Завершить дочерный процесс
+            // Завершить дочерный процесс, чтобы 2-й раз fork не в 1-й дочернем процессе.
+            exit(0); 
         } 
         // родительский процесс
         else 
