@@ -25,7 +25,8 @@ int main(int argc, char ** argv)
     int children[2];
     for (int i = 0; i < 2; i++)
     {
-        // Создать парные сокеты 
+        // Создать парные сокеты
+        // socketpair поддерживает только AF_UNIX
         if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockets) < 0) 
         {
             perror("socketpair() failed.\n");
