@@ -44,7 +44,7 @@ int main(int argc, char ** argv)
             printf("Child %d sent message.\n", i + 1);
             write(sockets[0], message[i], sizeof(message[i]));
             read(sockets[0], buf, sizeof(buf));
-            printf("Child %d received message: %s\n", i + 1, buf);
+            printf("Child %d received message: %s\n\n", i + 1, buf);
             close(sockets[0]);
             // Завершить дочерный процесс, чтобы 2-й раз fork не в 1-й дочернем процессе.
             break;
