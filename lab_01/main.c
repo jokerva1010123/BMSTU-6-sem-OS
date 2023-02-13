@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <errno.h>
 #include <unistd.h>
-#define STR1 "How are you from child 1?"
-#define STR2 "How are you from child 2?"
-#define ANSWER1 "I'm ok, thank you to child 1."
-#define ANSWER2 "I'm ok, thank you to child 2."
+#define STR1 "AAA."
+#define STR2 "BBB."
+#define ANSWER1 "CCCC."
+#define ANSWER2 "DDDD."
 #define BUF_SIZE 1024
 int main(int argc, char ** argv)
 { 
@@ -42,10 +42,10 @@ int main(int argc, char ** argv)
         if (children[i] == 0) 
         {
             close(sockets[1]);
-            printf("Child %d sent message.\n", i + 1);
+            printf("Child %d (pid = %d) sent message: %s\n", i + 1, getpid(), message[i]);
             write(sockets[0], message[i], sizeof(message[i]));
             read(sockets[0], buf, sizeof(buf));
-            printf("Child %d received message: %s\n\n", i + 1, buf);
+            printf("Child %d (pid = %d) received answer: %s\n\n", i + 1, getpid(), buf);
             close(sockets[0]);
             // Завершить дочерный процесс, чтобы 2-й раз fork не в 1-й дочернем процессе.
             break;
@@ -55,8 +55,8 @@ int main(int argc, char ** argv)
         {
             close(sockets[0]);
             read(sockets[1], buf, sizeof(buf));
-            printf("Parents received message: %s\n", buf);
-            printf("Parents sent message.\n");
+            printf("Parents (pid = %d) received message: %s\n", getpid(), buf);
+            printf("Parents (pid = %d) sent answer: %s\n", getpid(), answer[i]);
             write(sockets[1], answer[i], sizeof(answer[i]));
             close(sockets[1]); 
         }
