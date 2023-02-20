@@ -34,7 +34,7 @@ int main()
 	
 	server_sock_addr.sun_family = AF_UNIX;
 	strcpy(server_sock_addr.sun_path, SOCK_PATH);
-	memset(send_msg, 0, BUF_SIZE);
+
 	sprintf(send_msg, "From pid %d", getpid());
 	
 	while (1) 

@@ -57,9 +57,10 @@ int main(void)
 
     signal(SIGTSTP, sigint_handler); //изменение обработчика сигнала
 	
-	//listen будет иметь смысл только для протоколов, нацеленных на соединение (то есть только TCP)
+	//listen будет иметь смысл только для протоколов, 
+    //нацеленных на соединение (то есть только TCP)
 	//поэтому здесь не используется
-    printf("Waiting for messages.\nPress Ctrl + Z to stop...\n");
+    printf("Waiting for messages.\nPress Ctrl + Z to stop...\n\n");
 
     while (1)
     {

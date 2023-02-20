@@ -10,19 +10,14 @@
 #define BUF_SIZE 100
 #define N_CLIENTS 5
 
-
 int sock_fd;
 
 void del_socket(void)
 {
     if (close(sock_fd) == -1) //закрытие сокета
-    {
         return;
-    }
     if (unlink(SOCK_PATH) == -1) //удаление файла сокета
-    {
         return;
-    }
 }
 
 void sigtstp_handler(int signum)
@@ -63,7 +58,7 @@ int main()
         return EXIT_FAILURE;
 	}
 
-	printf("Listening.\nPress Ctrl + Z to stop...\n");	
+	printf("Listening.\nPress Ctrl + Z to stop...\n\n");	
 	
 	int bytes;
 	char recv_buf[BUF_SIZE];
@@ -80,7 +75,6 @@ int main()
 			return 1;
 		}
 
-
 		memset(recv_buf, 0, BUF_SIZE);
 		memset(send_buf, 0, BUF_SIZE);
 		bytes = recv(client_sock_fd, recv_buf, BUF_SIZE, 0);
@@ -92,9 +86,7 @@ int main()
 			strcat(send_buf, "Answer to client\n");
 
 			if(send(client_sock_fd, send_buf, strlen(send_buf), 0) == -1 )
-			{
 				printf("send() failed\n");
-			}
             printf("Server answer : %s", send_buf);
 		}
 		else
