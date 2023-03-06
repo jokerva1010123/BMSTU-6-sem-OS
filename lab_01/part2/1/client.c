@@ -31,21 +31,17 @@ int main(void)
 	
 	char buf[BUF_SIZE];
     sprintf(buf, "pid %d", getpid());
-	
-	while (1)
+	// передача данных серверу. 4 параметр 0 - дополнительные флаги, далее адрес сервера и его длина
+	if (sendto(sock_fd, buf, strlen(buf), 0, &srvr_name, strlen(srvr_name.sa_data) + sizeof(srvr_name.sa_family)) == -1)
 	{
-		// передача данных серверу. 4 параметр 0 - дополнительные флаги, далее адрес сервера и его длина
-		if (sendto(sock_fd, buf, strlen(buf), 0, &srvr_name, strlen(srvr_name.sa_data) + sizeof(srvr_name.sa_family)) == -1)
-		{
-			printf("sendto() failed");
-			close(sock_fd); //закрытие сокета
-			return EXIT_FAILURE;
-		}
-		
-		printf("Client sent: %s\n", buf);
-		
-		sleep(3);
+		printf("sendto() failed");
+		close(sock_fd); //закрытие сокета
+		return EXIT_FAILURE;
 	}
+	
+	printf("Client sent: %s\n", buf);
+	
+	sleep(3);
 	
     close(sock_fd);
     return EXIT_SUCCESS;
