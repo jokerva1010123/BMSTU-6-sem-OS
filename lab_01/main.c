@@ -57,7 +57,7 @@ int main(int argc, char ** argv)
             close(sockets[0]);
             read(sockets[1], buf, sizeof(buf));
             printf("Parents (pid = %d) received message: %s\n", getpid(), buf);
-            snprintf (answer[i], sizeof(answer[i]), "%s and parent %d", buf, getpid());
+            snprintf (answer[i], sizeof(answer[i]), "%s and parents %d", buf, getpid());
             printf("Parents (pid = %d) sent answer: %s\n", getpid(), answer[i]);
             write(sockets[1], answer[i], sizeof(answer[i]));
             close(sockets[1]); 
