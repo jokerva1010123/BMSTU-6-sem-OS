@@ -62,7 +62,7 @@ int main()
 	
 	int bytes;
 	char recv_buf[BUF_SIZE];
-	char send_buf[BUF_SIZE];
+	char send_buf[BUF_SIZE+100];
 		
 	while (1)
 	{
@@ -76,14 +76,13 @@ int main()
 		}
 
 		memset(recv_buf, 0, BUF_SIZE);
-		memset(send_buf, 0, BUF_SIZE);
+		memset(send_buf, 0, BUF_SIZE+100);
 		bytes = recv(client_sock_fd, recv_buf, BUF_SIZE, 0);
 		
 		if(bytes > 0)
 		{
 			printf("Server received: %s\n", recv_buf);
-			strcpy(send_buf, "Message recieved: ");
-			strcat(send_buf, "Answer to client\n");
+			snprintf(send_buf, sizeof(send_buf), "%s and server %d", recv_buf, getpid());
 
 			if(send(client_sock_fd, send_buf, strlen(send_buf), 0) == -1 )
 				printf("send() failed\n");
@@ -92,7 +91,7 @@ int main()
 		else
 		{
 			printf("recv() failed. Waiting for new connection\n");
-			break;
+			exit(0);
 		}
         printf("\n");
 	}

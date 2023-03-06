@@ -37,53 +37,49 @@ int main()
 
 	sprintf(send_msg, "From pid %d", getpid());
 	
-	while (1) 
+	if((sock_fd = socket(AF_UNIX, SOCK_STREAM, 0)) == -1 )
 	{
-		if((sock_fd = socket(AF_UNIX, SOCK_STREAM, 0)) == -1 )
-		{
-			printf("socket() failed\n");
-			return EXIT_FAILURE;
-		}
+		printf("socket() failed\n");
+		return EXIT_FAILURE;
+	}
 
 
-		if(connect(sock_fd, (struct sockaddr*)&server_sock_addr, strlen(server_sock_addr.sun_path) + sizeof(server_sock_addr.sun_family)) == -1)
-		{
-			printf("connect() failed\n");
-			close(sock_fd);
-			return EXIT_FAILURE;
-		}
+	if(connect(sock_fd, (struct sockaddr*)&server_sock_addr, strlen(server_sock_addr.sun_path) + sizeof(server_sock_addr.sun_family)) == -1)
+	{
+		printf("connect() failed\n");
+		close(sock_fd);
+		return EXIT_FAILURE;
+	}
 
+
+	if(send(sock_fd, send_msg, strlen(send_msg), 0 ) == -1)
+	{
+		printf("send() failed\n");
+	}
 	
-		if(send(sock_fd, send_msg, strlen(send_msg), 0 ) == -1)
-		{
-			printf("send() failed\n");
-		}
-		
-		printf ("Child sent: %s\n", send_msg);
-		memset(recv_msg, 0, BUF_SIZE);
+	printf ("Child sent: %s\n", send_msg);
+	memset(recv_msg, 0, BUF_SIZE);
 
-		if((bytes = recv(sock_fd, recv_msg, BUF_SIZE, 0)) > 0 )
+	if((bytes = recv(sock_fd, recv_msg, BUF_SIZE, 0)) > 0 )
+	{
+		printf("Client received: %s\n", recv_msg);
+	}
+	else
+	{
+		if(bytes < 0)
 		{
-			printf("Client received: %s\n", recv_msg);
+			printf("recv() failed\n");
 		}
 		else
 		{
-			if(bytes < 0)
-			{
-				printf("recv() failed\n");
-			}
-			else
-			{
-				printf("Server socket closed \n");
-				close(sock_fd);
-				break;
-			}
-
+			printf("Server socket closed \n");
+			close(sock_fd);
 		}
-		sleep(3);
-        printf("\n");
-		close(sock_fd);
+
 	}
+	sleep(3);
+	printf("\n");
+	close(sock_fd);
 
 	return 0;
 }
