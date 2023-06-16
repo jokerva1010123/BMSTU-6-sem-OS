@@ -1,0 +1,1 @@
+cmd_/home/vanh/Desktop/BMSTU-6-sem-OS/lab_03/abc.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/vanh/Desktop/BMSTU-6-sem-OS/lab_03/abc.ko /home/vanh/Desktop/BMSTU-6-sem-OS/lab_03/abc.o /home/vanh/Desktop/BMSTU-6-sem-OS/lab_03/abc.mod.o;  true

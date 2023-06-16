@@ -1,0 +1,1 @@
+cmd_/home/vanh/Desktop/BMSTU-6-sem-OS/lab_03/abc.mod := printf '%s\n'   abc.o | awk '!x[$$0]++ { print("/home/vanh/Desktop/BMSTU-6-sem-OS/lab_03/"$$0) }' > /home/vanh/Desktop/BMSTU-6-sem-OS/lab_03/abc.mod

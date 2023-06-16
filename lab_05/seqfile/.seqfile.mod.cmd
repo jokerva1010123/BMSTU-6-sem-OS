@@ -1,0 +1,1 @@
+cmd_/home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/seqfile/seqfile.mod := printf '%s\n'   seqfile.o | awk '!x[$$0]++ { print("/home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/seqfile/"$$0) }' > /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/seqfile/seqfile.mod

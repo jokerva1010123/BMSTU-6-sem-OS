@@ -1,0 +1,1 @@
+cmd_/home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/seqfile/Module.symvers := sed 's/ko$$/o/' /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/seqfile/modules.order | scripts/mod/modpost -m -a  -o /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/seqfile/Module.symvers -e -i Module.symvers   -T -

@@ -1,0 +1,1 @@
+cmd_/home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/fortune.mod := printf '%s\n'   fortune.o | awk '!x[$$0]++ { print("/home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/"$$0) }' > /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/fortune.mod

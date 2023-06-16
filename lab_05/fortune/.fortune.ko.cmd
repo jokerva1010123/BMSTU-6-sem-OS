@@ -1,0 +1,1 @@
+cmd_/home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/fortune.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/fortune.ko /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/fortune.o /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/fortune.mod.o;  true

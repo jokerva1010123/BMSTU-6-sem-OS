@@ -1,0 +1,1 @@
+cmd_/home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/modules.order := {   echo /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/fortune.ko; :; } | awk '!x[$$0]++' - > /home/vanh/Desktop/BMSTU-6-sem-OS/lab_05/fortune/modules.order
